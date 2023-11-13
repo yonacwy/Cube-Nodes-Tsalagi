@@ -1,16 +1,6 @@
 --NODES--
 
 cube_nodes_tsalagi.symbols = {
-	"1",
-	"2",
-	"3",
-	"4",
-	"5",
-	"6",
-	"7",
-	"8",
-	"9",
-	"0",
 	"a",
 	"e",
 	"i",
@@ -128,7 +118,17 @@ cube_nodes_tsalagi.symbols = {
 	"slash_left",
 	"slash_right",
 	"smile",
-	"tilde"
+	"tilde",
+	"1",
+	"2",
+	"3",
+	"4",
+	"5",
+	"6",
+	"7",
+	"8",
+	"9",
+	"0"
 }
 
 cube_nodes_tsalagi.fonts = {
