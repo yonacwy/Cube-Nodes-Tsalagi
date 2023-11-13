@@ -3,6 +3,7 @@ The mod adds colorful alphabetic, numerical, punctuation and special symbols blo
 
 
 ============================
+
 Added ᏣᎳᎩ Tsalagi Letters
 
 Credits: Fonts are from the Unicode Block
