@@ -5,7 +5,7 @@ local pm_node_list_name = "pm_node_list"
 local pm_dye_list_name = "pm_dye_list"
 local pm_font_dd = "pm_font_dd"
 
-function cube_nodes.get_paint_machine_fs(pos, nodes_count)
+function cube_nodes_tsalagi.get_paint_machine_fs(pos, nodes_count)
 	local list_w = math.ceil(nodes_count / 4)
 
 	local steps_c
@@ -34,7 +34,7 @@ function cube_nodes.get_paint_machine_fs(pos, nodes_count)
 	return fs
 end
 
-function cube_nodes.form_paint_machine_output_list(node_list_item, dye_list_item, font_type)
+function cube_nodes_tsalagi.form_paint_machine_output_list(node_list_item, dye_list_item, font_type)
 	local node_item_name = node_list_item:get_name()
 	local dye_item_name = dye_list_item:get_name()
 
@@ -62,9 +62,9 @@ function cube_nodes.form_paint_machine_output_list(node_list_item, dye_list_item
 		color = "darkgrey"
 	end
 
-	for _, sym in ipairs(cube_nodes.symbols) do
-		if not cube_nodes.skip_nodes[font_type] or (cube_nodes.skip_nodes[font_type] and not cube_nodes.skip_nodes[font_type][sym]) then
-			local nodename = "cube_nodes:node_" .. f_type .. sym .. "_" .. color
+	for _, sym in ipairs(cube_nodes_tsalagi.symbols) do
+		if not cube_nodes_tsalagi.skip_nodes[font_type] or (cube_nodes_tsalagi.skip_nodes[font_type] and not cube_nodes_tsalagi.skip_nodes[font_type][sym]) then
+			local nodename = "cube_nodes_tsalagi:node_" .. f_type .. sym .. "_" .. color
 
 			local stack = ItemStack(nodename)
 			stack:set_count(count)
@@ -76,7 +76,7 @@ function cube_nodes.form_paint_machine_output_list(node_list_item, dye_list_item
 	return list
 end
 
-function cube_nodes.on_inv_action_in_paint_machine(pos, action, listname, taken_count)
+function cube_nodes_tsalagi.on_inv_action_in_paint_machine(pos, action, listname, taken_count)
 	if not pos then return end
 
 	local dd_value = minetest.get_meta(pos):get_string("context_dd_value")
@@ -97,12 +97,12 @@ function cube_nodes.on_inv_action_in_paint_machine(pos, action, listname, taken_
 		local node_stack = inv:get_stack(pm_node_list_name, 1)
 		local dye_stack = inv:get_stack(pm_dye_list_name, 1)
 
-		local list = cube_nodes.form_paint_machine_output_list(node_stack, dye_stack, dd_value)
+		local list = cube_nodes_tsalagi.form_paint_machine_output_list(node_stack, dye_stack, dd_value)
 		inv:set_list(pm_output_list_name, list)
 	end)
 end
 
-minetest.register_node("cube_nodes:paint_machine", {
+minetest.register_node("cube_nodes_tsalagi:paint_machine", {
 	description = "Painting Machine",
 	visual_scale = 0.5,
 	drawtype = "mesh",
@@ -123,11 +123,11 @@ minetest.register_node("cube_nodes:paint_machine", {
 	on_construct = function(pos)
 		local meta = minetest.get_meta(pos)
 
-		meta:set_string("formspec", cube_nodes.get_paint_machine_fs(pos, cube_nodes.nodes_count))
+		meta:set_string("formspec", cube_nodes_tsalagi.get_paint_machine_fs(pos, cube_nodes_tsalagi.nodes_count))
 		meta:set_string("context_dd_value", "normal")
 
 		local inv = minetest.get_inventory({type="node", pos=pos})
-		local w = math.ceil(cube_nodes.nodes_count/4)
+		local w = math.ceil(cube_nodes_tsalagi.nodes_count/4)
 		inv:set_size(pm_output_list_name, w*4)
 		inv:set_width(pm_output_list_name, w)
 
@@ -144,13 +144,13 @@ minetest.register_node("cube_nodes:paint_machine", {
 		return stack:get_count()
 	end,
 	on_metadata_inventory_move = function(pos, from_list, from_index, to_list, to_index, count, player)
-		cube_nodes.on_inv_action_in_paint_machine(pos, "move", to_list)
+		cube_nodes_tsalagi.on_inv_action_in_paint_machine(pos, "move", to_list)
 	end,
 	on_metadata_inventory_put = function(pos, listname, index, stack, player)
-		cube_nodes.on_inv_action_in_paint_machine(pos, "put", listname)
+		cube_nodes_tsalagi.on_inv_action_in_paint_machine(pos, "put", listname)
 	end,
 	on_metadata_inventory_take = function(pos, listname, index, stack, player)
-		cube_nodes.on_inv_action_in_paint_machine(pos, "take", listname, stack:get_count())
+		cube_nodes_tsalagi.on_inv_action_in_paint_machine(pos, "take", listname, stack:get_count())
 	end,
 	on_receive_fields = function(pos, formname, fields, sender)
 		if fields.pm_font_dd then
@@ -161,7 +161,7 @@ minetest.register_node("cube_nodes:paint_machine", {
 			local node_stack = inv:get_stack(pm_node_list_name, 1)
 			local dye_stack = inv:get_stack(pm_dye_list_name, 1)
 
-			local list = cube_nodes.form_paint_machine_output_list(node_stack, dye_stack, new_ftype)
+			local list = cube_nodes_tsalagi.form_paint_machine_output_list(node_stack, dye_stack, new_ftype)
 
 			inv:set_list(pm_output_list_name, list)
 		elseif fields.quit then
@@ -178,7 +178,7 @@ minetest.register_node("cube_nodes:paint_machine", {
 })
 
 minetest.register_craft({
-	output = "cube_nodes:paint_machine",
+	output = "cube_nodes_tsalagi:paint_machine",
 	recipe = {
 		{"default:steelblock", "default:steelblock", "bucket:bucket_empty"},
 		{"", "default:glass", ""},

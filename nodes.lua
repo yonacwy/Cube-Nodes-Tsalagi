@@ -1,6 +1,6 @@
 --NODES--
 
-cube_nodes.symbols = {
+cube_nodes_tsalagi.symbols = {
 	"1",
 	"2",
 	"3",
@@ -11,31 +11,92 @@ cube_nodes.symbols = {
 	"8",
 	"9",
 	"0",
-	"A",
-	"B",
-	"C",
-	"D",
-	"E",
-	"F",
-	"G",
-	"H",
-	"I",
-	"J",
-	"K",
-	"L",
-	"M",
-	"N",
-	"O",
-	"P",
-	"Q",
-	"R",
-	"S",
-	"T",
-	"U",
-	"W",
-	"X",
-	"Y",
-	"Z",
+	"a",
+	"e",
+	"i",
+	"o",
+	"u",
+	"v",
+	"ga",
+	"ka",
+	"ge",
+	"gi",
+	"go",
+	"gu",
+	"gv",
+	"ha",
+	"he",
+	"hi",
+	"ho",
+	"hu",
+	"hv",
+	"la",
+	"le",
+	"li",
+	"lo",
+	"lu",
+	"lv",
+	"ma",
+	"me",
+	"mi",
+	"mo",
+	"mu",
+	"mv",
+	"na",
+	"hna",
+	"nah",
+	"ne",
+	"ni",
+	"no",
+	"nu",
+	"nv",
+	"qua",
+	"que",
+	"qui",
+	"quo",
+	"quu",
+	"quv",
+	"s",
+	"sa",
+	"se",
+	"si",
+	"so",
+	"su",
+	"sv",
+	"da",
+	"ta",
+	"de",
+	"te",
+	"di",
+	"di",
+	"do",
+	"du",
+	"dv",
+	"dla",
+	"tla",
+	"tle",
+	"tli",
+	"tlo",
+	"tlu",
+	"tlv",
+	"tsa",
+	"tse",
+	"tsi",
+	"tso",
+	"tsu",
+	"tsv",
+	"wa",
+	"we",
+	"wi",
+	"wo",
+	"wu",
+	"wv",
+	"ya",
+	"ye",
+	"yi",
+	"yo",
+	"yu",
+	"yv",
 	"ampersand",
 	"asterisk",
 	"bracket_left",
@@ -70,12 +131,12 @@ cube_nodes.symbols = {
 	"tilde"
 }
 
-cube_nodes.fonts = {
+cube_nodes_tsalagi.fonts = {
 	"normal",
 	"italic"
 }
 
-cube_nodes.colors = {
+cube_nodes_tsalagi.colors = {
 	"black",
 	"blue",
 	"brown",
@@ -92,8 +153,8 @@ cube_nodes.colors = {
 	"yellow"
 }
 
-cube_nodes.skip_nodes_count = 13
-cube_nodes.skip_nodes = {
+cube_nodes_tsalagi.skip_nodes_count = 13
+cube_nodes_tsalagi.skip_nodes = {
 	italic = {
 		asterisk=true,
 		corner_bracket_left=true,
@@ -114,9 +175,10 @@ cube_nodes.skip_nodes = {
 	}
 }
 
-cube_nodes.nodes_count = #cube_nodes.symbols
 
-function cube_nodes.name_to_desc(name)
+cube_nodes_tsalagi.nodes_count = #cube_nodes_tsalagi.symbols
+
+function cube_nodes_tsalagi.name_to_desc(name)
 	local words = name:split("_")
 
 	local str = ""
@@ -129,14 +191,14 @@ function cube_nodes.name_to_desc(name)
 end
 
 
-for _, font in ipairs(cube_nodes.fonts) do
-	for _, symbol in ipairs(cube_nodes.symbols) do
-		if not (cube_nodes.skip_nodes[font] and cube_nodes.skip_nodes[font][symbol]) then
-			for _, color in ipairs(cube_nodes.colors) do
+for _, font in ipairs(cube_nodes_tsalagi.fonts) do
+	for _, symbol in ipairs(cube_nodes_tsalagi.symbols) do
+		if not (cube_nodes_tsalagi.skip_nodes[font] and cube_nodes_tsalagi.skip_nodes[font][symbol]) then
+			for _, color in ipairs(cube_nodes_tsalagi.colors) do
 				local nodename = ("node_%s%s"):format(font == "normal" and "" or font .. "_", symbol)
 
-				minetest.register_node("cube_nodes:" .. nodename .. "_" .. color, {
-					description = cube_nodes.name_to_desc(nodename),
+				minetest.register_node("cube_nodes_tsalagi:" .. nodename .. "_" .. color, {
+					description = cube_nodes_tsalagi.name_to_desc(nodename),
 					tiles = {
 						"blank.png^(" .. nodename .. ".png^[colorize:" .. color .. ":255)",
 					},
@@ -158,6 +220,6 @@ end
 
 minetest.register_craft({
 	type = "shapeless",
-	output = "cube_nodes:node_empty_black",
+	output = "cube_nodes_tsalagi:node_empty_black",
 	recipe = {"default:steelblock", "dye:black"}
 })
